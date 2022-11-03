@@ -1,15 +1,15 @@
 {
-    "users": [{
-        "userId": 1,
+    "articles": [{
         "_id": 0,
-        "name": "Riri"
+        "name": "Article 1",
+        "description": "Description de fou pour l'article 1"
     }, {
-        "userId": 2,
         "_id": 1,
-        "name": "Fifi"
+        "name": "Article 2",
+        "description": "Description de fou pour l'article 2"
     }, {
-        "userId": 3,
         "_id": 2,
-        "name": "Louou"
+        "name": "Article 3",
+        "description": "Description de fou pour l'article 3"
     }]
 }

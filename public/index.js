@@ -32,9 +32,9 @@ function putData(route) {
     return new Promise((resolve, reject) => {
         console.log(route);
         let url = "http://localhost:3000/" + route;
-        let name = document.getElementById("name").value;
+        let description = document.getElementById("description").value;
         let body = {
-            'name': name
+            'description': description
         };
         let config = {
             headers: {"Content-Type": "application/json"}
