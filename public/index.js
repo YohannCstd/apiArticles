@@ -11,6 +11,16 @@ function handleClick(route, request) {
                 printData(res);
             });
             break;
+        case "POST":
+            postData(route).then((res) => {
+                printData(res);
+            });
+            break;
+        case "DELETE":
+            deleteData(route).then((res) => {
+                printData(res);
+            });
+            break;
     }
 
 }
@@ -30,7 +40,6 @@ function getData(route) {
 
 function putData(route) {
     return new Promise((resolve, reject) => {
-        console.log(route);
         let url = "http://localhost:3000/" + route;
         let description = document.getElementById("description").value;
         let body = {
@@ -45,8 +54,38 @@ function putData(route) {
             return reject(err.message);
         })
     })
+}
 
-}   
+function postData(route){
+    return new Promise((resolve, reject) => {
+        let url = "http://localhost:3000/" + route;
+        let name = document.getElementById("name").value;
+        let description = document.getElementById("description").value;
+        let body = {
+            'name': name,
+            'description': description
+        };
+        let config = {
+            headers: {"Content-Type": "application/json"}
+        }
+        axios.post(url,body,config).then((res) => {
+            return resolve(res.data);
+        }).catch((err) => {
+            return reject(err.message);
+        })
+    })
+}
+
+function deleteData(route){
+    return new Promise((resolve, reject) => {
+        let url = "http://localhost:3000/" + route;
+        axios.delete(url).then((res) => {
+            return resolve(res.data)
+        }).catch((err) => {
+            return reject(err.message);
+        })
+    })
+}
 
 function printData(message) {
     try {

@@ -1,3 +1,4 @@
+const { application } = require('express');
 const json = require('../database/article');
 
 module.exports = (app) => {
@@ -25,7 +26,26 @@ module.exports = (app) => {
             json["articles"][req.params.id]["description"] = req.body["description"];
             return res.status(200).send(json["articles"][req.params.id]);
         } catch (err){
-            console.error(err);
+            return res.status(500).send({message: "an error occured", status: 500});
+        }
+    })
+
+    app.post('/api/articles', (req, res) =>{
+        try{
+            if(!json.articles[req.params.id]) throw "Article not found";
+            if(!req.body) throw "Body is empty";
+            return res.status(200).send(json["articles"][req.params.id]);
+        } catch (err){
+            return res.status(500).send({message: "an error occured", status: 500});
+        }
+
+    })
+
+    app.delete('/api/articles/:id', (req, res) => {
+        try{
+            if(!json.articles[req.params.id]) throw "Article not found";
+            return res.status(200).send(json["articles"]);
+        } catch (err){
             return res.status(500).send({message: "an error occured", status: 500});
         }
     })
