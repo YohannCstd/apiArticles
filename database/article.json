@@ -1,0 +1,15 @@
+{
+    "users": [{
+        "userId": 1,
+        "_id": 0,
+        "name": "Riri"
+    }, {
+        "userId": 2,
+        "_id": 1,
+        "name": "Fifi"
+    }, {
+        "userId": 3,
+        "_id": 2,
+        "name": "Louou"
+    }]
+}
