@@ -59,7 +59,7 @@ function putData(route) {
 function postData(route){
     return new Promise((resolve, reject) => {
         let url = "http://localhost:3000/" + route;
-        let name = document.getElementById("name").value;
+        let name = document.getElementById("nom").value;
         let description = document.getElementById("description").value;
         let body = {
             'name': name,
