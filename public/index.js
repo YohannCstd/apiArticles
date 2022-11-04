@@ -1,5 +1,10 @@
-function handleClick(route, request) {
+//Config JSON for request
+const config = {
+    headers: {"Content-Type": "application/json"}
+};
 
+//Permet de choisir la bonne méthode en fonction de request
+function handleClick(route, request) {
     switch (request) {
         case "GET":
             getData(route).then((res) => {
@@ -22,14 +27,17 @@ function handleClick(route, request) {
             });
             break;
     }
-
 }
 
+//Create url for api with route
+function createUrl(route){
+    return "http://localhost:3000/" + route;
+}
+
+//Get data with route
 function getData(route) {
     return new Promise((resolve, reject) => {
-        console.log(route);
-        let url = "http://localhost:3000/" + route;
-        axios.get(url).then((res) => {
+        axios.get(createUrl(route)).then((res) => {
             return resolve(res.data);
         }).catch((err) => {
             return reject(err.message);
@@ -38,17 +46,16 @@ function getData(route) {
 
 }
 
+//Put data with route
 function putData(route) {
     return new Promise((resolve, reject) => {
-        let url = "http://localhost:3000/" + route;
+        //new description
         let description = document.getElementById("description").value;
+        //JSON for send to API 
         let body = {
             'description': description
         };
-        let config = {
-            headers: {"Content-Type": "application/json"}
-        }
-        axios.put(url, body, config).then((res) => {
+        axios.put(createUrl(route), body, config).then((res) => {
             return resolve(res.data);
         }).catch((err) => {
             return reject(err.message);
@@ -58,35 +65,32 @@ function putData(route) {
 
 function postData(route){
     return new Promise((resolve, reject) => {
-        let url = "http://localhost:3000/" + route;
+        //new name and description
         let name = document.getElementById("nom").value;
         let description = document.getElementById("description").value;
+        //JSON for send to API 
         let body = {
             'name': name,
             'description': description
         };
-        let config = {
-            headers: {"Content-Type": "application/json"}
-        }
-        axios.post(url,body,config).then((res) => {
+        axios.post(cretaeUrl(route),body,config).then((res) => {
             return resolve(res.data);
         }).catch((err) => {
             return reject(err.message);
         })
     })
 }
-
+//Delete data with route
 function deleteData(route){
     return new Promise((resolve, reject) => {
-        let url = "http://localhost:3000/" + route;
-        axios.delete(url).then((res) => {
+        axios.delete(createUrl(route)).then((res) => {
             return resolve(res.data)
         }).catch((err) => {
             return reject(err.message);
         })
     })
 }
-
+//fonction qui print les données de la requête dans api-rawRes
 function printData(message) {
     try {
         let el = document.getElementById("api-rawRes");
@@ -95,9 +99,7 @@ function printData(message) {
         handleError(err.message);
     }
 }
-
+//fonction qui gère les erreurs
 function handleError(errorMessage) {
-    console.error(errorMessage);
     printData(errorMessage.message);
 }
-
