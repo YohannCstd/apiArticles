@@ -38,7 +38,13 @@ function createUrl(route){
 function getData(route) {
     return new Promise((resolve, reject) => {
         axios.get(createUrl(route)).then((res) => {
-            return resolve(res.data);
+            console.log(typeof res.data);
+            console.log(res.data.length);
+            console.log("test",Object.keys(res.data).length);
+            if(Object.keys(res.data).length == 1){
+                return resolve(res.data.name);
+            } 
+            return resolve(getNameOfArticle(res.data));
         }).catch((err) => {
             return reject(err.message);
         })
@@ -102,4 +108,16 @@ function printData(message) {
 //fonction qui gère les erreurs
 function handleError(errorMessage) {
     printData(errorMessage.message);
+}
+
+//Filter for just return name
+function getNameOfArticle(data){
+    let listNameOfArticles = [];
+    console.log("each      " + data);
+    console.log(data["name"]);
+    data.forEach(element => {
+        console.log(element);
+        listNameOfArticles.push(element["name"]);
+    });
+    return listNameOfArticles;
 }

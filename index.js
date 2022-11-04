@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const bodyParser = require('body-parser');
 const path = require("path");
