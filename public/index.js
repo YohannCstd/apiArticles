@@ -73,7 +73,7 @@ function postData(route){
             'name': name,
             'description': description
         };
-        axios.post(cretaeUrl(route),body,config).then((res) => {
+        axios.post(createUrl(route),body,config).then((res) => {
             return resolve(res.data);
         }).catch((err) => {
             return reject(err.message);

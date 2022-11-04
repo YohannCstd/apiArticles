@@ -5,7 +5,7 @@ module.exports = (app) => {
     //Get all articles
     app.get('/api/articles', (req, res) => {
         try{
-            return res.status(200).send(json[articles]["name"]);
+            return res.status(200).send(json["articles"]);
         } catch (err){
             return res.status(500).send({message: "an error occured", status: 500});
         }
